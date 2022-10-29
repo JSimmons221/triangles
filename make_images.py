@@ -4,6 +4,7 @@ import os
 import glob
 
 
+#function to make a jpg of a triangle given 3 sets of coordinates and save it to a folder
 def triangle(output_path, a1, a2, b1, b2, c1, c2):
     image = Image.new("RGB", (300, 300), "white")
     draw = ImageDraw.Draw(image)
@@ -12,6 +13,7 @@ def triangle(output_path, a1, a2, b1, b2, c1, c2):
     image.save(output_path)
 
 
+#clears all images from the images folder, used to keep things tidy
 def clear_images():
     path = r'resources/images/*.jpg'
     files = glob.glob(path)
@@ -19,6 +21,7 @@ def clear_images():
         os.remove(f)
 
 
+#convert a csv of coordinates into jpgs using triangle, idk how the 'congruent' column will be used
 def csv_to_images(path):
     clear_images()
     with open(path) as file:
