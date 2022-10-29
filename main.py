@@ -79,4 +79,4 @@ def make_triangles():
     return ret
 
 
-make_data(10, r'resources/triangles.csv')
+make_data(50, r'resources/triangles.csv')

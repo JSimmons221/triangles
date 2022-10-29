@@ -1,5 +1,7 @@
 import csv
 from PIL import Image, ImageDraw
+import os
+import glob
 
 
 def triangle(output_path, a1, a2, b1, b2, c1, c2):
@@ -10,7 +12,15 @@ def triangle(output_path, a1, a2, b1, b2, c1, c2):
     image.save(output_path)
 
 
+def clear_images():
+    path = r'resources/images/*.jpg'
+    files = glob.glob(path)
+    for f in files:
+        os.remove(f)
+
+
 def csv_to_images(path):
+    clear_images()
     with open(path) as file:
         reader = csv.reader(file, delimiter=',')
         c = 0
@@ -21,4 +31,3 @@ def csv_to_images(path):
             c += 1
 
 
-csv_to_images(r'resources/triangles.csv')
