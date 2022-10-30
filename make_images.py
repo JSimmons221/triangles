@@ -5,11 +5,12 @@ import glob
 
 
 #function to make a jpg of a triangle given 3 sets of coordinates and save it to a folder
-def triangle(output_path, a1, a2, b1, b2, c1, c2):
-    image = Image.new("RGB", (300, 300), "white")
+def triangle(output_path, r):
+    image = Image.new("RGB", (700, 300), "white")
     draw = ImageDraw.Draw(image)
-    draw.polygon(((a1, a2), (b1, b2), (c1, c2)), outline="black")
-
+    draw.polygon(((int(r[0]), int(r[1])), (int(r[2]), int(r[3])), (int(r[4]), int(r[5]))), outline="black")
+    draw.polygon(((int(r[6]) + 400, int(r[7])), (int(r[8]) + 400, int(r[9])), (int(r[10]) + 400, int(r[11]))), outline="black")
+    draw.line(((350, 0), (350, 300)), fill='black')
     image.save(output_path)
 
 
@@ -29,8 +30,8 @@ def csv_to_images(path):
         c = 0
         for row in reader:
             if c != 0:
-                triangle(r'resources/images/pair%i_1.jpg' % c, int(row[0]), int(row[1]), int(row[2]), int(row[3]), int(row[4]), int(row[5]))
-                triangle(r'resources/images/pair%i_2.jpg' % c, int(row[6]), int(row[7]), int(row[8]), int(row[9]), int(row[10]), int(row[11]))
+                triangle(r'resources/images/pair%i.jpg' % c, row)
             c += 1
 
 
+csv_to_images(r'resources/triangles.csv')
