@@ -1,6 +1,7 @@
 import random as rand
 import csv
-
+import make_images as mi
+import neural_network as nn
 
 #Creates data for n pairs of triangles and puts them into the data set
 def make_data(n, path):
@@ -99,4 +100,8 @@ def make_triangles():
     return ret
 
 
-make_data(50, r'resources/triangles.csv')
+make_data(10, r'resources/triangles.csv')
+mi.csv_to_images(r'resources/triangles.csv')
+data, target = nn.load_my_fancy_dataset()
+nn.train(data, target)
+
