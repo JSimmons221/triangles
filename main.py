@@ -57,6 +57,23 @@ def get_lens(t):
     return lens
 
 
+def transpose_triangle(t):
+    t2 = t.copy()
+    max_x = 300 - max(t[0][0], t[1][0], t[2][0])
+    min_x = -1 * min(t[0][0], t[1][0], t[2][0])
+    max_y = 300 - max(t[0][1], t[1][1], t[2][1])
+    min_y = -1 * min(t[0][1], t[1][1], t[2][1])
+    trans_x = rand.randint(min_x, max_x)
+    trans_y = rand.randint(min_y, max_y)
+    t[0][0] = t[0][0] + trans_x
+    t[1][0] = t[1][0] + trans_x
+    t[2][0] = t[2][0] + trans_x
+    t[0][1] = t[0][1] + trans_y
+    t[1][1] = t[1][1] + trans_y
+    t[2][1] = t[2][1] + trans_y
+    return t2
+
+
 #helps to create the second triangle for the dataset
 def second_triangle(t1):
     #generate a new triangle
@@ -81,17 +98,24 @@ def make_triangles():
         for j in i:
             ret.append(j)
 
-    r = rand.randint(0, 1)
     #if r is 1, the triangles are the same (copy t1 into ret again) and add 1 to signify they are the same
-    if r == 1:
-        for i in t1:
-            for j in i:
-                ret.append(j)
+    if rand.randint(0, 1):
+        if rand.randint(0, 1):
+            for i in t1:
+                for j in i:
+                    ret.append(j)
+        else:
+            t2 = transpose_triangle(t1)
+            for i in t2:
+                for j in i:
+                    ret.append(j)
         ret.append(1)
 
     # if r is 0, the two triangles are different (create a new triangle t2 and add to ret) add 0 to signify they are different
-    elif r == 0:
+    else:
         t2 = second_triangle(t1)
+        if rand.randint(0, 1):
+            t2 = transpose_triangle(t2)
         for i in t2:
             for j in i:
                 ret.append(j)
