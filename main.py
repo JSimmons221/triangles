@@ -100,8 +100,12 @@ def make_triangles():
     return ret
 
 
-make_data(10, r'resources/triangles.csv')
+make_data(500, r'resources/triangles.csv')
+print("made triangles")
 mi.csv_to_images(r'resources/triangles.csv')
+print("made images")
 data, target = nn.load_my_fancy_dataset()
+print("created dataset")
 nn.train(data, target)
+print("done")
 
