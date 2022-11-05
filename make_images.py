@@ -6,11 +6,11 @@ import glob
 
 #function to make a jpg of a triangle given 3 sets of coordinates and save it to a folder
 def triangle(output_path, r):
-    image = Image.new("RGB", (700, 300), "white")
+    image = Image.new("RGB", (200, 100), "white")
     draw = ImageDraw.Draw(image)
     draw.polygon(((int(r[0]), int(r[1])), (int(r[2]), int(r[3])), (int(r[4]), int(r[5]))), outline="black")
-    draw.polygon(((int(r[6]) + 400, int(r[7])), (int(r[8]) + 400, int(r[9])), (int(r[10]) + 400, int(r[11]))), outline="black")
-    draw.line(((350, 0), (350, 300)), fill='black')
+    draw.polygon(((int(r[6]) + 100, int(r[7])), (int(r[8]) + 100, int(r[9])), (int(r[10]) + 100, int(r[11]))), outline="black")
+    draw.line(((100, 0), (100, 100)), fill='black')
     image.save(output_path)
 
 

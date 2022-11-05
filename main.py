@@ -23,23 +23,23 @@ def random_triangle():
     ret = []
 
     #creating the first coordinate
-    A = [rand.randint(25, 275), rand.randint(25, 275)]
+    A = [rand.randint(5, 95), rand.randint(5, 95)]
     ret.append(A)
 
     #creating the second coordinate
-    B = [rand.randint(25, 275), rand.randint(25, 275)]
+    B = [rand.randint(5, 95), rand.randint(5, 95)]
 
     #while A and B are the same remake B
     while A == B:
-        B = [rand.randint(25, 275), rand.randint(25, 275)]
+        B = [rand.randint(5, 95), rand.randint(5, 95)]
     ret.append(B)
 
     #creating the third coordinate
-    C = [rand.randint(25, 275), rand.randint(25, 275)]
+    C = [rand.randint(5, 95), rand.randint(5, 95)]
 
     #while C is the same as A or B recreate it (note: idek the odds of this happening but w/e, can never be to safe)
     while C == A or C == B:
-        C = [rand.randint(25, 275), rand.randint(25, 275)]
+        C = [rand.randint(5, 95), rand.randint(5, 95)]
     ret.append(C)
 
     return ret
@@ -59,9 +59,9 @@ def get_lens(t):
 
 def transpose_triangle(t):
     t2 = t.copy()
-    max_x = 300 - max(t[0][0], t[1][0], t[2][0])
+    max_x = 100 - max(t[0][0], t[1][0], t[2][0])
     min_x = -1 * min(t[0][0], t[1][0], t[2][0])
-    max_y = 300 - max(t[0][1], t[1][1], t[2][1])
+    max_y = 100 - max(t[0][1], t[1][1], t[2][1])
     min_y = -1 * min(t[0][1], t[1][1], t[2][1])
     trans_x = rand.randint(min_x, max_x)
     trans_y = rand.randint(min_y, max_y)
