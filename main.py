@@ -1,3 +1,4 @@
+import math
 import random as rand
 import csv
 import make_images as mi
@@ -63,14 +64,47 @@ def transpose_triangle(t):
     min_x = -1 * min(t[0][0], t[1][0], t[2][0])
     max_y = 100 - max(t[0][1], t[1][1], t[2][1])
     min_y = -1 * min(t[0][1], t[1][1], t[2][1])
-    trans_x = rand.randint(min_x, max_x)
-    trans_y = rand.randint(min_y, max_y)
+    trans_x = min(95, max(5, rand.randint(min_x, max_x)))
+    trans_y = min(95, max(5, rand.randint(min_y, max_y)))
     t[0][0] = t[0][0] + trans_x
     t[1][0] = t[1][0] + trans_x
     t[2][0] = t[2][0] + trans_x
     t[0][1] = t[0][1] + trans_y
     t[1][1] = t[1][1] + trans_y
     t[2][1] = t[2][1] + trans_y
+    return t2
+
+
+def check_valid(t):
+    for i in t:
+        for j in i:
+            if not 5 < j < 95:
+                return False
+    return True
+
+
+def rotate_coord(c, rad):
+    x = c[0] - 50
+    y = c[1] - 50
+    cos = math.cos(rad)
+    sin = math.sin(rad)
+    return [int(x*cos - y*sin) + 50, int(x*sin + y*cos) + 50]
+
+
+def rotate_triangle(t):
+    angle = rand.randint(1, 359)
+    rad = math.radians(angle)
+    t2 = []
+    for i in t:
+        t2.append(rotate_coord(i, rad))
+
+    while not check_valid(t2):
+        t2.clear()
+        angle = rand.randint(1, 359)
+        rad = math.radians(angle)
+        for i in t:
+            t2.append(rotate_coord(i, rad))
+
     return t2
 
 
@@ -100,15 +134,20 @@ def make_triangles():
 
     #if r is 1, the triangles are the same (copy t1 into ret again) and add 1 to signify they are the same
     if rand.randint(0, 1):
-        if rand.randint(0, 1):
-            for i in t1:
-                for j in i:
-                    ret.append(j)
-        else:
-            t2 = transpose_triangle(t1)
-            for i in t2:
-                for j in i:
-                    ret.append(j)
+        r = rand.randint(0,3)
+        t2 = t1.copy()
+
+        if r == 1:
+            t2 = rotate_triangle(t2)
+        elif r == 2:
+            t2 = transpose_triangle(t2)
+        elif r == 3:
+            t2 = rotate_triangle(t2)
+            t2 = transpose_triangle(t2)
+
+        for i in t2:
+            for j in i:
+                ret.append(j)
         ret.append(1)
 
     # if r is 0, the two triangles are different (create a new triangle t2 and add to ret) add 0 to signify they are different
