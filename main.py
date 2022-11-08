@@ -98,12 +98,14 @@ def rotate_triangle(t):
     for i in t:
         t2.append(rotate_coord(i, rad))
 
-    while not check_valid(t2):
+    c = 0
+    while not check_valid(t2) or c < 100:
         t2.clear()
         angle = rand.randint(1, 359)
         rad = math.radians(angle)
         for i in t:
             t2.append(rotate_coord(i, rad))
+        c += 1
 
     return t2
 
