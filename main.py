@@ -88,7 +88,10 @@ def rotate_coord(c, rad):
     y = c[1] - 50
     cos = math.cos(rad)
     sin = math.sin(rad)
-    return [int(x*cos - y*sin) + 50, int(x*sin + y*cos) + 50]
+    x1 = int(x*cos - y*sin) + 50
+    x2 = int(x*sin + y*cos) + 50
+    # print('[%i, %i]' % (x1, x2))
+    return [x1, x2]
 
 
 def rotate_triangle(t):
@@ -99,13 +102,16 @@ def rotate_triangle(t):
         t2.append(rotate_coord(i, rad))
 
     c = 0
-    while not check_valid(t2) or c < 100:
+    while not check_valid(t2) and c < 100:
         t2.clear()
         angle = rand.randint(1, 359)
         rad = math.radians(angle)
         for i in t:
             t2.append(rotate_coord(i, rad))
         c += 1
+
+    if c > 100:
+        t2 = t.copy()
 
     return t2
 
@@ -165,7 +171,7 @@ def make_triangles():
     return ret
 
 
-make_data(100, r'resources/triangles.csv')
+make_data(5000, r'resources/triangles.csv')
 print("made triangles")
 mi.csv_to_images(r'resources/triangles.csv')
 print("made images")
