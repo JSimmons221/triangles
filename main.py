@@ -15,6 +15,7 @@ def make_data(n, path):
         writer.writerow(['A1', 'B1', 'C1', 'A2', 'B2', 'C2', 'Congruent'])
         #make data and add to csv
         for i in range(n):
+            print(i)
             writer.writerow(make_triangles())
 
 
@@ -76,8 +77,8 @@ def transpose_triangle(t):
 
 
 def check_valid(t):
-    for i in t:
-        for j in i:
+    for coord in t:
+        for j in coord:
             if not 5 < j < 95:
                 return False
     return True
@@ -90,7 +91,6 @@ def rotate_coord(c, rad):
     sin = math.sin(rad)
     x1 = int(x*cos - y*sin) + 50
     x2 = int(x*sin + y*cos) + 50
-    # print('[%i, %i]' % (x1, x2))
     return [x1, x2]
 
 
@@ -110,7 +110,7 @@ def rotate_triangle(t):
             t2.append(rotate_coord(i, rad))
         c += 1
 
-    if c > 100:
+    if c >= 100:
         t2 = t.copy()
 
     return t2
