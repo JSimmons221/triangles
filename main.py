@@ -171,7 +171,7 @@ def make_triangles():
     return ret
 
 
-make_data(20000, r'Resources/triangles.csv')
+make_data(10000, r'Resources/triangles.csv')
 print("made triangles")
 mi.csv_to_images(r'Resources/triangles.csv')
 print("made images")
