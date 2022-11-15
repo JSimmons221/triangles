@@ -16,7 +16,7 @@ def triangle(output_path, r):
 
 #clears all images from the images folder, used to keep things tidy
 def clear_images():
-    path = r'resources/images/*.jpg'
+    path = r'Resources/images/*.jpg'
     files = glob.glob(path)
     for f in files:
         os.remove(f)
@@ -30,8 +30,8 @@ def csv_to_images(path):
         c = 0
         for row in reader:
             if c != 0:
-                triangle(r'resources/images/pair%i.jpg' % c, row)
+                triangle(r'Resources/images/pair%i.jpg' % c, row)
             c += 1
 
 
-csv_to_images(r'resources/triangles.csv')
+csv_to_images(r'Resources/triangles.csv')
