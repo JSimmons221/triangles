@@ -47,7 +47,7 @@ def train(data, target):
     resnet_model = keras.Sequential()
 
     pretrained_model = ResNet50(include_top=False,
-                                                      input_shape=(112, 112, 3),
+                                                      input_shape=(224, 224, 3),
                                                       pooling='avg',
                                                       weights='imagenet')
     for layer in pretrained_model.layers:
@@ -59,7 +59,7 @@ def train(data, target):
     resnet_model.add(layers.Dense(5, activation='softmax'))
     resnet_model.compile(optimizer=Adam(lr=0.001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-    history = resnet_model.fit(train_data,train_target, validation_data=(test_data,test_target ), epochs=50)
+    history = resnet_model.fit(train_data,train_target, validation_data=(test_data,test_target ), epochs=10)
     # fig1 = plt.gcf()
     # plt.plot(history.history['accuracy'])
     # plt.plot(history.history['val_accuracy'])
