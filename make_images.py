@@ -7,7 +7,7 @@ import re
 
 # clears all images from the images folder, used to keep things tidy
 def clear_images():
-    path = r'Resources/images/*.jpg'
+    path = r'resources/images/*.jpg'
     files = glob.glob(path)
     for f in files:
         os.remove(f)
@@ -31,7 +31,7 @@ def csv_to_images(path):
         c = 0
         for row in reader:
             if c != 0:
-                triangle(r'Resources/images/pair%i.jpg' % c, row)
+                triangle(r'resources/images/pair%i.jpg' % c, row)
             c += 1
 
 
@@ -59,7 +59,7 @@ def csv_to_images2(path):
             if c != 0:
                 s1 = split_string(row[0])
                 s2 = split_string(row[1])
-                shape(r'Resources/images/pair%i.jpg' % c, s1, s2)
+                shape(r'resources/images/pair%i.jpg' % c, s1, s2)
             c += 1
 
 
@@ -82,4 +82,4 @@ def shape(output_path, l1, l2):
     image.save(output_path)
 
 
-csv_to_images(r'Resources/triangles.csv')
+csv_to_images(r'resources/triangles.csv')

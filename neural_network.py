@@ -13,7 +13,7 @@ from sklearn.neighbors import KNeighborsClassifier
 import matplotlib.pyplot as plt
 
 def load_my_fancy_dataset():
-    with open(r'Resources/triangles.csv') as csv_file:
+    with open(r'resources/triangles.csv') as csv_file:
         data_reader = csv.reader(csv_file)
         next(data_reader, None)
         data = []
@@ -27,7 +27,7 @@ def load_my_fancy_dataset():
             csv_row = list(map(int, temp_row))
             csv_data.append(csv_row)
             target.append(int(label))
-            image = cv.imread(r'Resources/images/pair%i.jpg' % i)
+            image = cv.imread(r'resources/images/pair%i.jpg' % i)
             data.append(image)
         data = np.array(data)
         target = np.array(target)
