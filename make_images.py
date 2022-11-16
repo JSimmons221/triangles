@@ -26,7 +26,6 @@ def triangle(output_path, r):
 # convert a csv of coordinates into jpgs using triangle, idk how the 'congruent' column will be used
 def csv_to_images(path):
     clear_images()
-    path = r'resources/triangles.csv'
     with open(path) as file:
         reader = csv.reader(file, delimiter=',')
         c = 0
