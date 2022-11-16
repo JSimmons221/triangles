@@ -67,7 +67,7 @@ def shape(output_path, l1, l2):
     image = Image.new("RGB", (200, 100), "white")
     draw = ImageDraw.Draw(image)
     if len(l1) == 6:
-        draw.polygon(((l1[0], l2[1]), (l1[2], l1[3]), (l1[4], l1[5])), outline="black")
+        draw.polygon(((l1[0], l1[1]), (l1[2], l1[3]), (l1[4], l1[5])), outline="black")
     if len(l1) == 8:
         draw.polygon(((l1[0], l1[1]), (l1[2], l1[3]), (l1[4], l1[5]), (l1[6], l1[7])), outline="black")
 
