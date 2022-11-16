@@ -47,7 +47,7 @@ def train(data, target):
     resnet_model = keras.Sequential()
 
     pretrained_model = ResNet50(include_top=False,
-                                                      input_shape=(224, 224, 3),
+                                                      input_shape=(112, 112, 3),
                                                       pooling='avg',
                                                       weights='imagenet')
     for layer in pretrained_model.layers:
