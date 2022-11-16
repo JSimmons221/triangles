@@ -42,4 +42,4 @@ def train(data, target):
     # model.add(layers.Dense(10, activation='softmax'))
     model = ResNet50(weights='imagenet')
     model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    model.fit(train_data, train_target, epochs=16, validation_data=(test_data, test_target))
+    model.fit(train_data, train_target, epochs=50, validation_data=(test_data, test_target))
