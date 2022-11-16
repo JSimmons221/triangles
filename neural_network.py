@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.applications.inception_v3 import InceptionV3
 from tensorflow.keras.layers import Input
 from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.optimizers import Adam
 
 def load_my_fancy_dataset():
     with open(r'Resources/triangles.csv') as csv_file:
@@ -40,6 +41,33 @@ def train(data, target):
     # model.add(layers.Dense(64, activation='relu'))
     # model.add(layers.Dense(32, activation='relu'))
     # model.add(layers.Dense(10, activation='softmax'))
-    model = ResNet50(weights='imagenet')
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-    model.fit(train_data, train_target, epochs=50, validation_data=(test_data, test_target))
+    # model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    #model.fit(train_data, train_target, epochs=50, validation_data=(test_data, test_target))
+
+    resnet_model = keras.Sequential()
+
+    pretrained_model = ResNet50(include_top=False,
+                                                      input_shape=(224, 224, 3),
+                                                      pooling='avg',
+                                                      weights='imagenet')
+    for layer in pretrained_model.layers:
+        layer.trainable = False
+
+    resnet_model.add(pretrained_model)
+    resnet_model.add(layers.Flatten())
+    resnet_model.add(layers.Dense(512, activation='relu'))
+    resnet_model.add(layers.Dense(5, activation='softmax'))
+    resnet_model.compile(optimizer=Adam(lr=0.001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+    history = resnet_model.fit(train_data,train_target, validation_data=(test_data,test_target ), epochs=10)
+    fig1 = plt.gcf()
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.axis(ymin=0.4, ymax=1)
+    plt.grid()
+    plt.title('Model Accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epochs')
+    plt.legend(['train', 'validation'])
+    plt.show()
+
