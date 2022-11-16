@@ -252,4 +252,4 @@ def make_triangles():
     return ret
 
 
-make_data2(20, r'resources/shapes.csv')
+make_data2(20, r'Resources/shapes.csv')
