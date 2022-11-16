@@ -64,22 +64,20 @@ def csv_to_images2(path):
 
 
 def shape(output_path, l1, l2):
-    image = Image.new("RGB", (224, 224), "white")
+    image = Image.new("RGB", (200, 100), "white")
     draw = ImageDraw.Draw(image)
     if len(l1) == 6:
-        draw.polygon(((l1[0] + 6, l2[1] + 62), (l1[2] + 6, l1[3] + 62), (l1[4] + 6, l1[5] + 62)), outline="black")
+        draw.polygon(((l1[0], l2[1]), (l1[2], l1[3]), (l1[4], l1[5])), outline="black")
     if len(l1) == 8:
-        draw.polygon(((l1[0] + 6, l2[1] + 62), (l1[2] + 6, l1[3] + 62), (l1[4] + 6, l1[5] + 62),
-                      (l1[6] + 6, l1[7] + 62)), outline="black")
+        draw.polygon(((l1[0], l1[1]), (l1[2], l1[3]), (l1[4], l1[5]), (l1[6], l1[7])), outline="black")
 
     if len(l2) == 6:
-        draw.polygon(((l2[0]+ 118, l2[1] + 62), (l2[2] + 118, l2[3] + 62), (l2[4] + 118, l2[5] + 62)), outline="black")
+        draw.polygon(((l2[0] + 100, l2[1]), (l2[2] + 100, l2[3]), (l2[4] + 100, l2[5])), outline="black")
     if len(l2) == 8:
-        draw.polygon(((l2[0]+ 118, l2[1] + 62), (l2[2] + 118, l2[3] + 62), (l2[4] + 118, l2[5] + 62),
-                                                                           (l2[6] + 118, l2[7] + 62)),
+        draw.polygon(((l2[0] + 100, l2[1]), (l2[2] + 100, l2[3]), (l2[4] + 100, l2[5]), (l2[6] + 100, l2[7])),
                      outline="black")
-    draw.line(((112, 0), (112, 224)), fill='black')
+    draw.line(((100, 0), (100, 200)), fill='black')
     image.save(output_path)
 
 
-csv_to_images(r'resources/triangles.csv')
+csv_to_images2(r'resources/triangles.csv')

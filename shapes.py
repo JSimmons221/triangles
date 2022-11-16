@@ -42,7 +42,7 @@ def random_rectangle():
         len2 = rand.randint(10, 90)
 
     x1 = rand.randint(5, 95 - len1)
-    y1 = rand.randint(5, 95 - len1)
+    y1 = rand.randint(5, 95 - len2)
 
     return [[x1, y1], [x1 + len1, y1], [x1 + len1, y1 + len2], [x1, y1 + len2]]
 
@@ -147,7 +147,16 @@ def make_shapes():
 
     # 1 = same shape, 2 =
     if rand.randint(0,1):
-        ret = [s1, s1, 1]
+        s2 = s1.copy()
+        r = rand.randint(0,3)
+        if r == 1:
+            s2 = rotate_shape(s2)
+        elif r == 2:
+            s2 = transpose_shape(s2)
+        elif r == 3:
+            s2 = rotate_shape(s2)
+            s2 = transpose_shape(s2)
+        ret = [s1, s2, 1]
     else:
         s2 = []
         # 1 = same type of shape, 2 = different shape
